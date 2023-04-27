@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    [SerializeField] private CameraShaker shaker;
+
     [Header("Health")]
     [SerializeField,Range(100,200)] private float startHealth;
 
@@ -26,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float dmgAmount)
     {
+        //shaker.ShakeCamera(1f,1f);
         health.CurrentHealth -= dmgAmount;
         Debug.Log("Damaging Player");
         OnTakeDamage?.Invoke(health.CurrentHealth);

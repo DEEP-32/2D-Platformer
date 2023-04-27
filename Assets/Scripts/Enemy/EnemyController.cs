@@ -215,6 +215,7 @@ public class EnemyController : MonoBehaviour
     [Header("Attack State")]
     [SerializeField] private float attackCooldown = .2f;
     [SerializeField] private float attackDamage = 2f;
+    [SerializeField] private LayerMask whatToDamage; 
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private Transform attackPoint;
     private float lastTimeAttack = 0f;
@@ -242,7 +243,7 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("Attacking the player");
 
-       /* Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, whatToDamage);
         if (hitObjects == null)
         {
             //Debug.Log("Didnt hit anything");
@@ -258,9 +259,10 @@ public class EnemyController : MonoBehaviour
             {
                 continue;
             }
-            health.TakeDamage(damage);*/
+            health.TakeDamage(attackDamage);
 
             lastTimeAttack = Time.time;
+        }
     }
 
     #endregion

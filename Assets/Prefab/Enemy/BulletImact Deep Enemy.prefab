@@ -51,6 +51,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8497319406587481764, guid: 48214f3cf653f734792c2837b6f9d300, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497319406587481764, guid: 48214f3cf653f734792c2837b6f9d300, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497319406587481764, guid: 48214f3cf653f734792c2837b6f9d300, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8497319406587481765, guid: 48214f3cf653f734792c2837b6f9d300, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.ctime1
       value: 65535

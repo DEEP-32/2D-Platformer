@@ -1,4 +1,7 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 //TODO : implement variable length jump.
 public class PlayerController2 : MonoBehaviour
@@ -15,14 +18,18 @@ public class PlayerController2 : MonoBehaviour
 
     [Header("Movement,Speed and direction")]
     [SerializeField] private float groundSpeed = 400f;
+    [SerializeField] private float accelRate = 30f;
+    [SerializeField] private float dccelRate = 60f;
+    [SerializeField] private float maxSpeed = 13f;
     float horizontalInput;
-    public bool isFacingRight => transform.localScale.x > 0f;
-    public bool isFacingLeft => transform.localScale.x < 0f;
+    public bool isFacingRight => transform.eulerAngles.y == 0f;
+    public bool isFacingLeft => transform.eulerAngles.y == 180f || transform.eulerAngles.y == -180f;
     public bool isFalling => rb.velocity.y < 0f;
 
     [Header("Ground Check")]
     [SerializeField] float groundCheckDistance = 0.4f;
     [SerializeField] LayerMask whatIsGround;
+    private bool wasGrounded = false;
 
     [Header("Shoot Parameters")]
     [SerializeField] private KeyCode shootKey = KeyCode.Mouse0;
@@ -34,21 +41,71 @@ public class PlayerController2 : MonoBehaviour
 
     Rigidbody2D rb;
     BoxCollider2D boxCol2D;
+    TrailRenderer trail;
+    Animator anim;
+
+
+    //public Properties
+    public bool IsIdle => rb.velocity.x == 0f;
+    public bool IsMoving => rb.velocity.x > .1f;
+    public bool IsJumpPressed => jumpInput;
+    public float MoveSpeed => rb.velocity.x;
+    public bool IsLanded => !wasGrounded && isGrounded();
+
     
     //float jumpPressedTime = 0;
 
     public static PlayerController2 instance;
+    private float currentHorizontalSpeed = 0;
+
+    private int animSpeedHashId;
 
     private void Awake()
     {
         if(instance == null) instance = this;
         rb = GetComponent<Rigidbody2D>();
         boxCol2D = GetComponent<BoxCollider2D>();
+        trail = GetComponentInChildren<TrailRenderer>();
+        anim = GetComponent<Animator>();
     }
+
+
+
+    private void Start()
+    {
+        animSpeedHashId = Animator.StringToHash("Speed");
+    }
+
     private void Update()
     { 
         TakeInput();
+
+        if (IsIdle)
+        {
+            trail.enabled = false;
+        }
+        else { 
+            
+            trail.enabled = true; 
+        
+        
+        }
+
+        HandleAnimations();
+
+        //Debug.Log("Was grounded: " + wasGrounded + " and Is Grounded : " + isGrounded());
+        if(!wasGrounded && isGrounded())
+        {
+            //Debug.Log("Just landed");
+            createDust();
+        }
+
+
+        wasGrounded = isGrounded();
+        
         handleFlip();
+        ClampSpeed();
+        //CaluclateSpeed();
 
         handleCoyote();
 
@@ -61,12 +118,16 @@ public class PlayerController2 : MonoBehaviour
         }
             ////Debug.Log(coyoteTimer);
         handleGravityScale();
+
+
         //handleVariabeJump();
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new(horizontalInput * groundSpeed * Time.fixedDeltaTime,rb.velocity.y);
+
+        currentHorizontalSpeed = horizontalInput * groundSpeed * Time.fixedDeltaTime;
+        rb.velocity = new(currentHorizontalSpeed,rb.velocity.y);
     }
 
     private void TakeInput()
@@ -113,16 +174,22 @@ public class PlayerController2 : MonoBehaviour
     {
         if(horizontalInput < 0f && isFacingRight)
         {
-            Flip();
+            //Debug.Log("Fliping to 180");
+            Flip(180f);
         }
         if(horizontalInput > 0f && isFacingLeft)
         {
-            Flip();
+            //Debug.Log("Fliping to zero");
+            Flip(0);
         }
     }
-    private void Flip()
+    private void Flip(float degreeToFlip)
     {
-        transform.localScale = new Vector3(transform.localScale.x*-1,transform.localScale.y,transform.localScale.z) ;
+        /*transform.localScale = new Vector3(transform.localScale.x*-1,transform.localScale.y,transform.localScale.z) ;*/
+
+        transform.eulerAngles = new Vector3(0,degreeToFlip,0);
+
+        //Debug.Log("Current angle is: "+ transform.eulerAngles);
         if(isGrounded())
            createDust();
     }
@@ -138,5 +205,43 @@ public class PlayerController2 : MonoBehaviour
         else coyoteTimer -= Time.deltaTime;
     }
 
+    /*private void CaluclateSpeed()
+    {
+        if (horizontalInput != 0)
+        {
+            currentHorizontalSpeed += horizontalInput * accelRate * Time.deltaTime;
+            currentHorizontalSpeed = Mathf.Clamp(currentHorizontalSpeed, -maxSpeed, maxSpeed);
+        }
 
+        else
+        {
+            currentHorizontalSpeed = Mathf.MoveTowards(currentHorizontalSpeed, 0, dccelRate * Time.deltaTime);
+        }
+    }*/
+
+    private void ClampSpeed()
+    {
+        rb.velocity = new Vector2(Mathf.Clamp(currentHorizontalSpeed, -maxSpeed, maxSpeed),rb.velocity.y);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "LevelComplete")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        }
+    }
+
+
+
+    private void HandleAnimations()
+    {
+        if(horizontalInput == 0)
+        {
+            Debug.Log("Inside zero");
+            anim.SetFloat(animSpeedHashId, 0);
+        }
+
+        anim.SetFloat(animSpeedHashId, Mathf.Abs(rb.velocity.x));
+        Debug.Log(Mathf.Abs(rb.velocity.x));
+    }
 }

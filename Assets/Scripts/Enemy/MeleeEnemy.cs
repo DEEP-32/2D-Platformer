@@ -91,8 +91,7 @@ public class MeleeEnemy : MonoBehaviour
         foreach(Collider2D hitObject in hitObjects)
         {
             var health = hitObject.GetComponent<PlayerHealth>();
-            var rb = hitObject.GetComponent<Rigidbody2D>(); 
-            
+                        
             if(health == null)
             {
                 continue;

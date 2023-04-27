@@ -7,10 +7,12 @@ public class EnemyBullets
     {
        if(other.transform.tag == "Player")
        {
+            base.OnCollisionEnter2D(other);
             var health = other.transform.GetComponent<PlayerHealth>();
             health.TakeDamage(base.damage);
             Vector2 v1 = new(transform.localPosition.x, transform.localPosition.y);
-            base.OnbulletImpact(v1,-v1);
+            Vector2 normal = other.contacts[0].normal;
+            base.OnbulletImpact(v1,normal);
        }
     }
 

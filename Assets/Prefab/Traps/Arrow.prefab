@@ -128,7 +128,7 @@ MonoBehaviour:
   speed: 11
   damage: 10
   bulletLifeTime: 5
-  bulletImpact: {fileID: 0}
+  bulletImpact: {fileID: 341197559230491995, guid: c4cfe8510f5614744b2f350f5f30d744, type: 3}
 --- !u!50 &6688755692036827057
 Rigidbody2D:
   serializedVersion: 4

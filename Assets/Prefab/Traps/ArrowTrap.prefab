@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234176676874066658}
   - component: {fileID: 4234176676874066659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowTrapMiddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1013672415
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234176677213994151}
   - component: {fileID: 4234176677213994152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowTrapTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,8 +154,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1013672415
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.4528302, g: 0.4047217, b: 0.3225347, a: 1}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4234176677415619821}
   - component: {fileID: 4234176677415619820}
   - component: {fileID: 4234176677415619819}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowTrap
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d369af5ff4601c4d95f26743bf2298c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 2
+  attackCooldown: 2.5
   firepoint: {fileID: 4234176678893416186}
   whatToDetect:
     serializedVersion: 2
@@ -255,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234176677772914031}
   - component: {fileID: 4234176677772914032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowTrapBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,8 +315,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1013672415
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.23584908, g: 0.20107967, b: 0.065637246, a: 1}
@@ -339,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234176678072399759}
   - component: {fileID: 4234176678072399760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowTrapGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4234176678893416186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}

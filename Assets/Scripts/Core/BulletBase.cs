@@ -8,6 +8,7 @@ public class BulletBase : MonoBehaviour
     [SerializeField] protected GameObject bulletImpact;
     protected Rigidbody2D rb;
     protected float timer = 0;
+    protected Vector3 bulletRot;
 
     protected virtual void Awake()
     {
@@ -29,6 +30,9 @@ public class BulletBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
+        //bulletRot = other.contacts[0].normal;
+        //bulletRot = other.contacts[0].normal;
+
     }
     protected virtual void OnEnable()
     {
@@ -40,7 +44,15 @@ public class BulletBase : MonoBehaviour
     protected virtual void OnbulletImpact(Vector2 pos, Vector2 rot)
     {
         Deactivate();
-        rot.y = PlayerController2.instance.isFacingRight ? 0 : -180f;
+        //rot.y = -bulletRot.x;
+    
+        Debug.Log(rot);
+        if(rot.x < 0)
+           rot = new Vector3(0,0,0);
+        else
+        {
+            rot = new Vector3(0,180f,0);   
+        }
         if(bulletImpact != null)
           Destroy(Instantiate(bulletImpact, pos, Quaternion.Euler(rot)), 1f);
 
