@@ -9,6 +9,7 @@ public class EnemyBullets
        {
             base.OnCollisionEnter2D(other);
             var health = other.transform.GetComponent<PlayerHealth>();
+            var rb = other.transform.GetComponent<Rigidbody>();
             health.TakeDamage(base.damage);
             Vector2 v1 = new(transform.localPosition.x, transform.localPosition.y);
             Vector2 normal = other.contacts[0].normal;

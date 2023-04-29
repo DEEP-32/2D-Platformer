@@ -98,6 +98,7 @@ public class PlayerController2 : MonoBehaviour
         {
             //Debug.Log("Just landed");
             createDust();
+            //CinemachineShake.Instance.ShakeCamera(.1f, .1f);
         }
 
 
@@ -237,7 +238,7 @@ public class PlayerController2 : MonoBehaviour
     {
         if(horizontalInput == 0)
         {
-            Debug.Log("Inside zero");
+            //Debug.Log("Inside zero");
             anim.SetFloat(animSpeedHashId, 0);
         }
 

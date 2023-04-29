@@ -4,6 +4,7 @@ public class BulletBase : MonoBehaviour
 {
     [SerializeField] protected float speed = 20f;
     [SerializeField] protected float damage = 20f;
+    [SerializeField] protected float impactForce = 20f;
     [SerializeField] protected float bulletLifeTime = 5;
     [SerializeField] protected GameObject bulletImpact;
     protected Rigidbody2D rb;
