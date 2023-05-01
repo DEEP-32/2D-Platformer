@@ -498,7 +498,10 @@ MonoBehaviour:
   timeToAchieveMaxJump: 3
   coyoteTime: 0.2
   dust: {fileID: 8756855767038268694}
-  groundSpeed: 400
+  groundSpeed: 1000
+  accelRate: 10
+  dccelRate: 20
+  maxSpeed: 10
   groundCheckDistance: 0.4
   whatIsGround:
     serializedVersion: 2

@@ -47,7 +47,7 @@ public class BulletBase : MonoBehaviour
         Deactivate();
         //rot.y = -bulletRot.x;
     
-        Debug.Log(rot);
+        //Debug.Log(rot);
         if(rot.x < 0)
            rot = new Vector3(0,0,0);
         else

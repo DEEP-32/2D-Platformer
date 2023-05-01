@@ -25,7 +25,18 @@ public class FireScript : MonoBehaviour
                 return;
 
 
-            projectilePrefab.transform.SetPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);
+            if (PlayerController2.instance.isFacingRight)
+            {
+
+                projectilePrefab.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.Euler(Vector3.zero));
+            }
+
+            else
+            {
+                projectilePrefab.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.Euler(new Vector3(0,180f,0)));
+            }
+
+            Debug.Log(gameObject.transform.eulerAngles);
             projectilePrefab.SetActive(true);
 
             lastTimeFire = Time.time;

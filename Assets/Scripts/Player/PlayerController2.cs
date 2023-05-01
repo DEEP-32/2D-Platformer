@@ -22,9 +22,7 @@ public class PlayerController2 : MonoBehaviour
     [SerializeField] private float dccelRate = 60f;
     [SerializeField] private float maxSpeed = 13f;
     float horizontalInput;
-    public bool isFacingRight => transform.eulerAngles.y == 0f;
-    public bool isFacingLeft => transform.eulerAngles.y == 180f || transform.eulerAngles.y == -180f;
-    public bool isFalling => rb.velocity.y < 0f;
+   
 
     [Header("Ground Check")]
     [SerializeField] float groundCheckDistance = 0.4f;
@@ -51,8 +49,11 @@ public class PlayerController2 : MonoBehaviour
     public bool IsJumpPressed => jumpInput;
     public float MoveSpeed => rb.velocity.x;
     public bool IsLanded => !wasGrounded && isGrounded();
+    public bool isFacingRight => transform.eulerAngles.y == 0f;
+    public bool isFacingLeft => transform.eulerAngles.y == 180f || transform.eulerAngles.y == -180f;
+    public bool isFalling => rb.velocity.y < 0f;
 
-    
+
     //float jumpPressedTime = 0;
 
     public static PlayerController2 instance;
@@ -91,7 +92,7 @@ public class PlayerController2 : MonoBehaviour
         
         }
 
-        HandleAnimations();
+        //HandleAnimations();
 
         //Debug.Log("Was grounded: " + wasGrounded + " and Is Grounded : " + isGrounded());
         if(!wasGrounded && isGrounded())
@@ -129,6 +130,7 @@ public class PlayerController2 : MonoBehaviour
 
         currentHorizontalSpeed = horizontalInput * groundSpeed * Time.fixedDeltaTime;
         rb.velocity = new(currentHorizontalSpeed,rb.velocity.y);
+        Debug.Log("Current speed is: "  + rb.velocity);
     }
 
     private void TakeInput()
@@ -234,7 +236,7 @@ public class PlayerController2 : MonoBehaviour
 
 
 
-    private void HandleAnimations()
+   /* private void HandleAnimations()
     {
         if(horizontalInput == 0)
         {
@@ -244,5 +246,5 @@ public class PlayerController2 : MonoBehaviour
 
         anim.SetFloat(animSpeedHashId, Mathf.Abs(rb.velocity.x));
         Debug.Log(Mathf.Abs(rb.velocity.x));
-    }
+    }*/
 }
